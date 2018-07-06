@@ -1,0 +1,3 @@
+#ignore dependencies and back part
+/node_modules
+/test_back

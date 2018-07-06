@@ -1,0 +1,157 @@
+import React from 'react';
+import InputMask from 'react-input-mask';
+import StepSelector from './StepSelector';
+import { connect } from 'react-redux';
+import { submitFirstForm, nextForm, prevForm } from '../actions/actions';
+
+class StepOneForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            cities: props.cities ? props.cities : [],
+            plans: props.plans ? props.plans : [],
+            selectedCity: props.selectedCity,
+            selectedPlan: props.selectedPlan,
+            email: props.email,
+            number: props.number,
+            price: props.price,
+        };
+    };
+    
+    componentDidMount() {
+        fetch('http://127.0.0.1:5000/cities')
+	        .then(res => res.json())
+	        .then(data => this.setState({ cities: data }));
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.selectedCity !== prevState.selectedCity) {
+            this.loadPlans();
+        } else if (this.state.selectedPlan !== prevState.selectedPlan) {
+            this.loadPrice();
+        };
+    };
+
+    onNumberChange = (e) => {
+        this.setState({
+          number: e.target.value
+        });
+    };
+
+    onEmailChange = (e) => {
+        this.setState({
+          email: e.target.value
+        });
+    };
+
+    onCityChange = (e) => {
+        this.setState({ selectedCity: e.target.value })
+    };
+
+    loadPlans = () => {
+        fetch(`http://127.0.0.1:5000/plans/${this.state.cities.indexOf(this.state.selectedCity)}`)
+	        .then(res => res.json())
+	        .then(data => this.setState({ plans: data }));
+    }
+
+    loadPrice = () => {
+        fetch(`http://127.0.0.1:5000/prices/${this.state.selectedPlan}`)
+        .then(res => res.json())
+        .then(data => this.setState({ price: data }))
+    }
+
+    onPlanChange = (e) => {
+        this.setState({
+            selectedPlan: e.target.value
+        });
+    };
+
+    stepForward = () => {       
+        // if (
+        //     this.state.selectedCity && 
+        //     this.state.selectedPlan &&
+        //     this.state.email &&
+        //     this.state.number.indexOf('_') === -1 &&
+        //     this.state.number.length !== 0
+        // ) {
+        //     this.props.dispatch(submitFirstForm(this.state));
+        //     this.props.dispatch(nextForm());
+        // } else {
+        //     alert('PLESE SUBMIT ALL SPECIFIED FIELDS!')
+        // }
+
+            this.props.dispatch(submitFirstForm(this.state));
+            this.props.dispatch(nextForm());
+        
+    };
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <select 
+                        value={this.state.selectedCity} 
+                        onChange={this.onCityChange}
+                        disabled={this.props.step === 4}
+                    >
+                        <option hidden selected>Город</option>
+                        {this.state.cities.map( (city) => (
+                            <option 
+                                key = {city}
+                                value = {city}
+                            >
+                                {city}
+                            </option>
+                        ))}
+                    </select>
+                    <select 
+                        value={this.state.selectedPlan} 
+                        onChange={this.onPlanChange}
+                        disabled={this.props.step === 4 || !this.state.selectedCity}
+                    >
+                        <option hidden selected>План страхования</option>
+                        {this.state.plans.map( (plan) => (
+                            <option 
+                                key = {plan}
+                                value = {plan}
+                            >
+                                {plan}
+                            </option>
+                        ))}
+                    </select>
+                    Стоимость доплаты: {this.state.price} рублей
+                    <br/>
+                    <input 
+                        type="text"
+                        placeholder="E-mail"
+                        value={this.state.email}
+                        onChange={this.onEmailChange}
+                        disabled={this.props.step === 4}
+                    />
+                    <InputMask 
+                        mask="8 (999) 999-99-99"
+                        value={this.state.number}
+                        alwaysShowMask={true}
+                        onChange={this.onNumberChange}
+                        disabled={this.props.step === 4}
+                    />
+                </form>
+                {this.props.step !== 4 && <StepSelector 
+                    stepBack={this.stepBack}
+                    stepForward={this.stepForward}
+                />}
+            </div>
+        );
+    };
+    
+};
+
+const mapStateToProps = (state, props) => {
+    return {
+        step: state.step,
+        ...state.firstFormState
+    };
+};
+
+export default connect(mapStateToProps)(StepOneForm);
