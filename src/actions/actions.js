@@ -20,3 +20,7 @@ export const nextForm = () => ({
 export const prevForm = () => ({
     type: 'PREV_FORM'
 });
+
+export const clearForm = () => ({
+    type: 'CLEAR_FORM'
+});

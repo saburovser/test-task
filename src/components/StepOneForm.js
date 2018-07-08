@@ -1,6 +1,7 @@
 import React from 'react';
 import InputMask from 'react-input-mask';
 import StepSelector from './StepSelector';
+import ErrorModal from './ErrorModal';
 import { connect } from 'react-redux';
 import { submitFirstForm, nextForm, prevForm } from '../actions/actions';
 
@@ -16,11 +17,12 @@ class StepOneForm extends React.Component {
             email: props.email,
             number: props.number,
             price: props.price,
+            error: '',
         };
     };
     
     componentDidMount() {
-        fetch('http://127.0.0.1:5000/cities')
+        fetch('http://192.168.1.101:5000/cities')
 	        .then(res => res.json())
 	        .then(data => this.setState({ cities: data }));
     };
@@ -50,16 +52,16 @@ class StepOneForm extends React.Component {
     };
 
     loadPlans = () => {
-        fetch(`http://127.0.0.1:5000/plans/${this.state.cities.indexOf(this.state.selectedCity)}`)
+        fetch(`http://192.168.1.101:5000/plans/${this.state.cities.indexOf(this.state.selectedCity)}`)
 	        .then(res => res.json())
 	        .then(data => this.setState({ plans: data }));
-    }
+    };
 
     loadPrice = () => {
-        fetch(`http://127.0.0.1:5000/prices/${this.state.selectedPlan}`)
+        fetch(`http://192.168.1.101:5000/prices/${this.state.selectedPlan}`)
         .then(res => res.json())
         .then(data => this.setState({ price: data }))
-    }
+    };
 
     onPlanChange = (e) => {
         this.setState({
@@ -68,22 +70,22 @@ class StepOneForm extends React.Component {
     };
 
     stepForward = () => {       
-        // if (
-        //     this.state.selectedCity && 
-        //     this.state.selectedPlan &&
-        //     this.state.email &&
-        //     this.state.number.indexOf('_') === -1 &&
-        //     this.state.number.length !== 0
-        // ) {
-        //     this.props.dispatch(submitFirstForm(this.state));
-        //     this.props.dispatch(nextForm());
-        // } else {
-        //     alert('PLESE SUBMIT ALL SPECIFIED FIELDS!')
-        // }
-
+        if (
+            this.state.selectedCity && 
+            this.state.selectedPlan &&
+            this.state.email &&
+            this.state.number.indexOf('_') === -1 &&
+            this.state.number.length !== 0
+        ) {
             this.props.dispatch(submitFirstForm(this.state));
             this.props.dispatch(nextForm());
-        
+        } else {
+            this.setState({ error: 'Не все обязательные поля заполнены или не все поля заполнены верно' })
+        };        
+    };
+
+    onModalClose = () => {
+        this.setState({ error: '' });
     };
 
     render() {
@@ -141,6 +143,10 @@ class StepOneForm extends React.Component {
                     stepBack={this.stepBack}
                     stepForward={this.stepForward}
                 />}
+                <ErrorModal
+                    error={this.state.error}
+                    onModalClose={this.onModalClose}
+                />
             </div>
         );
     };

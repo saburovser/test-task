@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import MainForm from './components/MainForm';
+import MainPage from './components/MainPage';
+
 
 const store = configureStore();
 
 const jsx = (
     <Provider store={store}>
-        <MainForm />
+        <MainPage />
     </Provider>
 );
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import StepSelector from './StepSelector';
+import ErrorModal from './ErrorModal';
 import { connect } from 'react-redux';
 import { submitSecondForm, nextForm, prevForm } from '../actions/actions';
 
@@ -10,19 +11,24 @@ class StepTwoForm extends React.Component {
         this.state = {
             firstName: props.firstName ? props.firstName : "",
             lastName: props.lastName ? props.lastName : "",
-            policyNotNeeded: props.policyNotNeeded ? props.policyNotNeeded : false
+            policyNotNeeded: props.policyNotNeeded ? props.policyNotNeeded : false,
+            error: '',
         }
     };
 
     onFirstNameChange = (e) => {
+        const firstName = e.target.value.replace(/[^a-z ]/i, "").toUpperCase();
+        
         this.setState({
-          firstName: e.target.value.toUpperCase()
+          firstName
         });
     };
 
     onLastNameChange = (e) => {
+        const lastName = e.target.value.replace(/[^a-z ]/i, "").toUpperCase();
+        
         this.setState({
-          lastName: e.target.value.toUpperCase()
+          lastName
         });
     };
 
@@ -39,14 +45,16 @@ class StepTwoForm extends React.Component {
 
     stepForward = () => {
         if(!this.state.policyNotNeeded && (!this.state.firstName || !this.state.lastName)) {
-            alert('SUBMIT ALL REQUIRED FIELDS TO CONTINUE!');
+            this.setState({ error: 'Заполнены не все обязательные поля' })
         } else {
             this.props.dispatch(submitSecondForm(this.state))
             this.props.dispatch(nextForm());
         }
-        
-        
     }
+
+    onModalClose = () => {
+        this.setState({ error: '' });
+    };
 
     render() {
         return (
@@ -75,6 +83,10 @@ class StepTwoForm extends React.Component {
                     stepBack={this.stepBack}
                     stepForward={this.stepForward}
                 />}
+                <ErrorModal
+                    error={this.state.error}
+                    onModalClose={this.onModalClose}
+                />
             </div>
         );
     }

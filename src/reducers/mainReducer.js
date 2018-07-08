@@ -1,5 +1,5 @@
 const mainReducerDefaultState = {
-    step: 1,
+    step: 0,
     
     firstFormState: {
         cities: [],
@@ -19,7 +19,7 @@ const mainReducerDefaultState = {
 
     thirdFormState : {
         file: null,
-        isLoaded: false
+        fileLoaded: false
     }
 };
 
@@ -52,7 +52,7 @@ const mainReducer = (state = mainReducerDefaultState, action) => {
                 ...state,
                 thirdFormState: {
                     file: action.file,
-                    isLoaded: action.isLoaded,
+                    fileLoaded: action.fileLoaded,
                 },
             };
         case 'NEXT_FORM':
@@ -65,6 +65,8 @@ const mainReducer = (state = mainReducerDefaultState, action) => {
                 ...state,
                 step: state.step - 1
             };
+        case 'CLEAR_FORM':
+            return mainReducerDefaultState;
         default:
             return state;
     }
