@@ -22,7 +22,7 @@ class StepThreeForm extends React.Component {
         if (this.state.file && !this.state.fileLoaded) {
             let data = new FormData();
             data.append('file', this.state.file);
-            fetch('http://192.168.1.101:5000/uploadfile', { method: 'POST', body: data })
+            fetch('http://127.0.0.1:5000/uploadfile', { method: 'POST', body: data })
                 .then(res => res.text())
                 .then(text => console.log(text))
                 .then(() => this.setState({ fileLoaded: true, isLoading: false }))
@@ -66,10 +66,10 @@ class StepThreeForm extends React.Component {
     };
 
     downloadFile = () => {
-        fetch('http://192.168.1.101:5000/getfile')
+        fetch('http://127.0.0.1:5000/getfile')
 	        .then(res => res.blob())
 	        .then(blob => download(blob))
-    }
+    };
 
     onModalClose = () => {
         this.setState({ error: '' });

@@ -24,7 +24,7 @@ class MainForm extends React.Component {
             number
         });
 
-        fetch('http://192.168.1.101:5000/request', { 
+        fetch('http://127.0.0.1:5000/request', { 
             method: 'POST', 
             body: json,
             headers: {

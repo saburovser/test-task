@@ -22,7 +22,7 @@ class StepOneForm extends React.Component {
     };
     
     componentDidMount() {
-        fetch('http://192.168.1.101:5000/cities')
+        fetch('http://127.0.0.1:5000/cities')
 	        .then(res => res.json())
 	        .then(data => this.setState({ cities: data }));
     };
@@ -52,13 +52,13 @@ class StepOneForm extends React.Component {
     };
 
     loadPlans = () => {
-        fetch(`http://192.168.1.101:5000/plans/${this.state.cities.indexOf(this.state.selectedCity)}`)
+        fetch(`http://127.0.0.1:5000/plans/${this.state.cities.indexOf(this.state.selectedCity)}`)
 	        .then(res => res.json())
 	        .then(data => this.setState({ plans: data }));
     };
 
     loadPrice = () => {
-        fetch(`http://192.168.1.101:5000/prices/${this.state.selectedPlan}`)
+        fetch(`http://127.0.0.1:5000/prices/${this.state.selectedPlan}`)
         .then(res => res.json())
         .then(data => this.setState({ price: data }))
     };
