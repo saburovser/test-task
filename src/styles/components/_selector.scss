@@ -1,0 +1,21 @@
+.SELECTOR {
+    display: flex;
+    margin: 20px;
+}
+
+.SELECTOR__BUTTONBACK {
+    padding: 15px 50px;
+    color: white;
+    background: grey;
+    border: none;
+    margin-right: 20px;
+    outline: none;
+}
+
+.SELECTOR__BUTTONFORWARD {
+    padding: 15px 50px;
+    color: white;
+    background: red;
+    border: none;
+    outline: none;
+}

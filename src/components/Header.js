@@ -4,7 +4,8 @@ import { nextForm } from '../actions/actions';
 
 class Header extends React.Component {
     state = {
-        isNavVisible: true
+        isNavVisible: true,
+        isFormOpened: false
     };
 
     toggleNav = () => {
@@ -13,21 +14,24 @@ class Header extends React.Component {
 
     openForm = () => {
         if (this.props.step === 0) {
-            this.props.dispatch(nextForm())
+            this.className += " HEADER__BUTTON--ACTIVE";
+            this.props.dispatch(nextForm());
         }
     };
 
+    className = "HEADER__BUTTON"
+
     render() {
         return (
-            <div>
+            <div className="HEADER">
                 {this.state.isNavVisible && <nav>
-                    <button>Главная</button>
-                    <button>Информация по программам ДМС</button>
-                    <button>Персональная информация</button>
-                    <button onClick={this.openForm}>Оформить ДМС</button>
-                    <button>Заявки страхования</button>
+                    <button className="HEADER__BUTTON">Главная</button>
+                    <button className="HEADER__BUTTON">Информация по программам ДМС</button>
+                    <button className="HEADER__BUTTON">Персональная информация</button>
+                    <button className={this.className} onClick={this.openForm}>Оформить ДМС</button>
+                    <button className="HEADER__BUTTON">Заявки страхования</button>
                 </nav>}
-                <button onClick={this.toggleNav}>BURGER</button>
+                <button className="HEADER__BURGERBUTTON" onClick={this.toggleNav}>M</button>
             </div>
         )
     }

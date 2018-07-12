@@ -15,13 +15,23 @@ module.exports = (env) => {
                 loader: 'babel-loader',
                 test: /\.js$/,
                 exclude: /node_modules/
-            }, {
+            }, 
+            {
                 test: /\.s?css$/,
                 use: [
                     'style-loader',
                     'css-loader',
                     'sass-loader'
                 ]
+            }, 
+            
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'img/',
+                    name: '[name].[ext]',
+                }
             }]
         },
         devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',

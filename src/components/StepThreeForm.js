@@ -77,29 +77,33 @@ class StepThreeForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <p>This if the Third Form</p>
-                {this.props.step !==4 && 
-                <div>
-                    <button onClick={this.downloadFile}>Download a file</button>
-                    <Files
-                        ref='files'
-                        onChange={this.onFilesChange}
-                        onError={this.onFilesError}
-                        accepts={['image/png', 'image/jpeg', 'image/tiff', 'application/pdf']}
-                        maxFiles={1}
-                        maxFileSize={5242880}
-                        minFileSize={0}
-                        clickable
-                    >
-                        Drop files here or click to upload
-                    </Files>
-                </div>}
-                {this.state.isLoading &&<img src="/images/loading.gif" height="50px" width="50px"/>}
-                {this.state.fileLoaded && <p>{this.state.file.name}</p>}
-                {this.state.fileLoaded && this.props.step !==4 && <button
-                    onClick={this.onFileRemove}
-                >X</button>}
+            <div className="APP">
+                {this.props.step !==4 && <h1>Заявка на оформление полиса ДМС</h1>}
+                <div className="FORM">
+                    <div className="FORM__BIGITEM">
+                        Скачать заявление
+                        <button onClick={this.downloadFile}>D</button>
+                    </div>
+                    <div className="FORM__BIGITEM">
+                        {!this.state.fileLoaded && <Files
+                            ref='files'
+                            onChange={this.onFilesChange}
+                            onError={this.onFilesError}
+                            accepts={['image/png', 'image/jpeg', 'image/tiff', 'application/pdf']}
+                            maxFiles={1}
+                            maxFileSize={5242880}
+                            minFileSize={0}
+                            clickable
+                        >
+                            Загрузите скан или фото заявления с вашей подписью
+                        </Files>}
+                        {this.state.isLoading &&<img src="../public/img/loading.gif" height="50px" width="50px"/>}
+                        {this.state.fileLoaded && <p>{this.state.file.name}</p>}
+                        {this.state.fileLoaded && <button
+                                onClick={this.onFileRemove}
+                        >X</button>}
+                    </div>
+                </div>
                 {this.props.step !== 4 && <StepSelector 
                     stepBack={this.stepBack}
                     stepForward={this.stepForward}

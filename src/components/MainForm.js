@@ -4,11 +4,11 @@ import StepTwoForm from './StepTwoForm';
 import StepThreeForm from './StepThreeForm';
 import { connect } from 'react-redux';
 import StepSelector from './StepSelector';
-import { clearForm } from '../actions/actions';
+import { prevForm } from '../actions/actions';
 
 class MainForm extends React.Component {
-    cancelForm = () => {
-        this.props.dispatch(clearForm());
+    stepBack = () => {
+        this.props.dispatch(prevForm());
     };
     
     sendData = () => {
@@ -40,29 +40,30 @@ class MainForm extends React.Component {
         switch (this.props.step) {
             case 1:
                 return (
-                    <div>
+                    <div className="SUMMARY">
                         <StepOneForm />
                     </div>
                 );
             case 2:
                 return (
-                    <div>
+                    <div className="SUMMARY">
                         <StepTwoForm />
                     </div>
                 );
             case 3:
                 return (
-                    <div>
+                    <div className="SUMMARY">
                         <StepThreeForm />
                     </div>
                 );
             case 4:
                 return (
-                    <div>
+                    <div className="SUMMARY">
+                        <h1>Заявка на оформление полиса ДМС</h1>
                         <StepOneForm />
                         <StepTwoForm />
                         <StepThreeForm />
-                        <StepSelector stepBack={this.cancelForm} stepForward={this.sendData}/>
+                        <StepSelector stepBack={this.stepBack} stepForward={this.sendData}/>
                     </div>
                 );
             default:

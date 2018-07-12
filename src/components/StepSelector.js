@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default (props) => (
-    <div>
-        <button onClick={props.stepBack}>
+    <div className="SELECTOR">
+        <button className="SELECTOR__BUTTONBACK" onClick={props.stepBack}>
             { "Назад" }
         </button>
-        <button onClick={props.stepForward}>
+        <button className="SELECTOR__BUTTONFORWARD" onClick={props.stepForward}>
             { "Далее" }
         </button>
     </div>

@@ -1,0 +1,29 @@
+.HEADER {
+    width: 90%;
+    display: flex;
+    float: right;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.HEADER__BUTTON {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    margin: 0px 10px;
+}
+
+.HEADER__BUTTON--ACTIVE {
+    text-decoration: underline;
+}
+
+.HEADER__BURGERBUTTON {
+    color: white;
+    align-self: flex-end;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: url('../../public/img/burger.svg') 
+}

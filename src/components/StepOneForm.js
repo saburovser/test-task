@@ -90,9 +90,16 @@ class StepOneForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <form>
-                    <select 
+            <div className="APP">
+                {this.props.step !==4 && <h1>Заявка на оформление полиса ДМС</h1>}
+                <form className="FORM">                  
+                    <div className="FORM__HEADER">
+                        Шаг 1
+                        <br/>
+                        Сотрудник: Имя Сотрудника
+                    </div>
+                    <select
+                        className="FORM__INPUT"
                         value={this.state.selectedCity} 
                         onChange={this.onCityChange}
                         disabled={this.props.step === 4}
@@ -108,6 +115,7 @@ class StepOneForm extends React.Component {
                         ))}
                     </select>
                     <select 
+                        className="FORM__INPUT"
                         value={this.state.selectedPlan} 
                         onChange={this.onPlanChange}
                         disabled={this.props.step === 4 || !this.state.selectedCity}
@@ -122,24 +130,36 @@ class StepOneForm extends React.Component {
                             </option>
                         ))}
                     </select>
-                    Стоимость доплаты: {this.state.price} рублей
-                    <br/>
-                    <input 
+                    <div className="FORM__SMALLITEM">
+                        Стоимость доплаты:
+                        <br/> 
+                        {this.state.price} рублей
+                    </div>
+                    <input
+                        className="FORM__BIGINPUT"
                         type="text"
                         placeholder="E-mail"
                         value={this.state.email}
                         onChange={this.onEmailChange}
                         disabled={this.props.step === 4}
                     />
-                    <InputMask 
+                    <InputMask
+                        className="FORM__BIGINPUT"
                         mask="8 (999) 999-99-99"
                         value={this.state.number}
                         alwaysShowMask={true}
                         onChange={this.onNumberChange}
                         disabled={this.props.step === 4}
                     />
+                    <div className="FORM__UNDERTEXT">
+                        Рабочий (с возможностью получения личных писем) или личный
+                    </div>
+                    <div className="FORM__UNDERTEXT">
+                        Для регистрации в личном медицинском кабинете
+                    </div>
                 </form>
                 {this.props.step !== 4 && <StepSelector 
+                    className="SELECTOR"
                     stepBack={this.stepBack}
                     stepForward={this.stepForward}
                 />}

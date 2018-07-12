@@ -25,7 +25,7 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['file']
         f.save(secure_filename(f.filename))
-        sleep(5)
+        sleep(1)
         return 'file uploaded successfully'
     return 'some error happened'
 

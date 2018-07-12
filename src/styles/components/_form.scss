@@ -1,0 +1,119 @@
+.SUMMARY {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 100px;
+    width: 60%;
+}
+
+.APP {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    width: 100%;
+    // position: absolute;
+    // left: 50%;
+    // transform: translate(-50%);
+    // width: 60%;
+    // margin-top: 100px;
+}
+
+// .APP--SECOND {
+//     margin-top: 420px;
+// }
+
+// .APP--THIRD {
+//     margin-top: 694px;
+// }
+
+h1 {
+    color: white;
+    font-size: 25px;
+    font-weight: normal;
+    margin: 0 0 20px 0;
+}
+
+.FORM {
+    background: white;
+    font-size: 20px;
+    padding: 20px;
+    margin: 1px 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+};
+
+.FORM__BIGINPUT {
+    margin: 10px;
+    border: 1px solid black;    
+    border-radius: 2px;
+    padding: 20px 10px;
+    background: transparent;
+    flex-grow: 3;
+};
+
+.FORM__BIGINPUT:disabled {
+    background: #dddddd;
+}
+
+.FORM__INPUT {
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 10px;
+    background: transparent;
+    flex-grow: 1;
+    flex-basis: 20%;
+};
+
+.FORM__INPUT:disabled {
+    background: #dddddd;
+}
+
+.FORM__SMALLITEM {
+    margin: 10px;
+    padding: 10px;
+    background: transparent;
+    flex-grow: 1;
+    flex-basis: 20%;
+    white-space: nowrap;
+};
+
+.FORM__BIGITEM {
+    margin: 10px;
+    padding: 10px;
+    background: transparent;
+    flex-grow: 3;
+};
+
+.FORM__BIGITEM > p {
+    display: inline;
+}
+
+.files-dropzone {
+    display: inline-block;
+}
+
+.FORM__UNDERTEXT {
+    margin: 10px;
+    flex-grow: 3;
+    font-size: 10px;
+    flex-basis: 40%;
+    margin-top: 0;
+}
+
+.FORM__HEADER {
+    margin: 10px;
+    padding: 10px;
+    background: transparent;
+    width: 100%
+};

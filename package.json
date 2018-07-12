@@ -20,6 +20,7 @@
     "css-loader": "0.28.4",
     "downloadjs": "^1.4.7",
     "express": "^4.16.3",
+    "file-loader": "^1.1.11",
     "live-server": "^1.2.0",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",
@@ -30,9 +31,10 @@
     "react-modal": "3.5.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "resolve-url-loader": "^2.3.0",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "validator": "8.0.0",
+    "validator": "^10.4.0",
     "webpack": "3.1.0",
     "webpack-dev-server": "2.5.1"
   }
