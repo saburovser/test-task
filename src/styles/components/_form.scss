@@ -92,18 +92,37 @@ h1 {
     margin: 10px;
     padding: 10px;
     background: transparent;
-    flex-grow: 3;
+    flex-grow: 1;
+    color: $new-red;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 };
 
 .FORM__BIGITEM > p {
-    display: inline;
+    display: inline-block;
+    color: $new-red;
+}
+
+.FORM__BIGITEM > div {
+    display: inline-block;
+}
+
+.FORM__BIGITEM > button {
+    background: none;
+    border: none;
+    outline: none;
+    color: $new-red;
 }
 
 .files-dropzone {
     display: inline-block;
+    cursor: pointer;
 }
 
 .FORM__UNDERTEXT {
+    color: gray;
     margin: 10px;
     flex-grow: 3;
     font-size: 10px;
@@ -113,7 +132,21 @@ h1 {
 
 .FORM__HEADER {
     margin: 10px;
-    padding: 10px;
     background: transparent;
-    width: 100%
+    width: 100%;
+    color: gray;
+    font-size: 10px;
 };
+
+.FORM__HEADER > p {
+    margin-bottom: 0;
+    font-size: 20px;
+    color: black;
+    display: inline-block;
+}
+
+.FORM__HEADER > p > p {
+    display: inline;
+    color: $new-red;
+}
+

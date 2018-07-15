@@ -20,10 +20,12 @@
 }
 
 .HEADER__BURGERBUTTON {
-    color: white;
     align-self: flex-end;
     border: none;
     outline: none;
-    background: transparent;
-    background-image: url('../../public/img/burger.svg') 
+    background: none;
+    //height: 20px;
+    //width: 20px;
+    //margin: 0px 10px;
+    //background: url('../../public/img/menu.png') no-repeat;
 }

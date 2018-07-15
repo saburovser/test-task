@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { nextForm } from '../actions/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends React.Component {
     state = {
@@ -31,7 +33,25 @@ class Header extends React.Component {
                     <button className={this.className} onClick={this.openForm}>Оформить ДМС</button>
                     <button className="HEADER__BUTTON">Заявки страхования</button>
                 </nav>}
-                <button className="HEADER__BURGERBUTTON" onClick={this.toggleNav}>M</button>
+                <button 
+                    className="HEADER__BURGERBUTTON"
+                    onClick={this.toggleNav}>
+                    
+                    {!this.state.isNavVisible ? 
+                        <FontAwesomeIcon 
+                            icon={faBars}
+                            size="1x"
+                            color="white"
+                        />
+                    :
+                        <FontAwesomeIcon 
+                            icon={faTimes}
+                            size="1x"
+                            color="white"
+                        />
+                    }
+                    
+                </button>
             </div>
         )
     }

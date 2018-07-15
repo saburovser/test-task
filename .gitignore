@@ -1,3 +1,2 @@
-#ignore dependencies and database (cause it's not working)
+#ignore dependencies
 /node_modules
-/mongodb

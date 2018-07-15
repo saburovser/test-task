@@ -59,6 +59,7 @@ class StepTwoForm extends React.Component {
     render() {
         return (
             <div className="APP">
+                {this.props.step !==4 && <h1>Заявка на оформление полиса ДМС</h1>}
                 <form className="FORM">
                     <div className="FORM__HEADER">
                         Шаг 2: Оформление полиса выезжающего за рубеж
@@ -97,7 +98,7 @@ class StepTwoForm extends React.Component {
                             onChange={this.togglePolicyCheckbox}
                             disabled={this.props.step === 4}
                         />
-                        Мне не нужен полис выезжающего за рубеж
+                        <p>Мне не нужен полис выезжающего за рубеж</p> 
                     </div>
                     
                 </form>

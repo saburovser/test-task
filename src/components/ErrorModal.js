@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBan, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 Modal.setAppElement(document.getElementById('app'))
 
@@ -12,9 +13,21 @@ export default (props) => (
         isOpen={!!props.error}
         onRequestClose={props.onModalClose}
     >
-        <img src="./img/error.png"/>
+        <FontAwesomeIcon 
+            icon={faBan}
+            className="MODAL__ERROR"
+            size="3x"
+            onClick={props.onModalClose}
+        />
         <h3>Ошибка!</h3>
         <p>{props.error}</p>
-        <button onClick={props.onModalClose}></button>
+        <button onClick={props.onModalClose}>
+            <FontAwesomeIcon 
+                icon={faTimes}
+                color="gray"
+                size="2x"
+                onClick={props.onModalClose}
+            />
+        </button>
     </Modal>
 );

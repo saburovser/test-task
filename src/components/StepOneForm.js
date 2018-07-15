@@ -3,6 +3,7 @@ import InputMask from 'react-input-mask';
 import StepSelector from './StepSelector';
 import ErrorModal from './ErrorModal';
 import { connect } from 'react-redux';
+import isEmail from 'validator/lib/isEmail';
 import { submitFirstForm, nextForm, prevForm } from '../actions/actions';
 
 class StepOneForm extends React.Component {
@@ -73,7 +74,7 @@ class StepOneForm extends React.Component {
         if (
             this.state.selectedCity && 
             this.state.selectedPlan &&
-            this.state.email &&
+            isEmail(this.state.email) &&
             this.state.number.indexOf('_') === -1 &&
             this.state.number.length !== 0
         ) {
@@ -96,7 +97,7 @@ class StepOneForm extends React.Component {
                     <div className="FORM__HEADER">
                         Шаг 1
                         <br/>
-                        Сотрудник: Имя Сотрудника
+                        <p>Сотрудник: <p>Имя Сотрудника</p></p> 
                     </div>
                     <select
                         className="FORM__INPUT"

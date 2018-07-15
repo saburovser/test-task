@@ -1,6 +1,6 @@
 .SELECTOR {
     display: flex;
-    margin: 20px;
+    margin-top: 30px;
 }
 
 .SELECTOR__BUTTONBACK {
@@ -15,7 +15,7 @@
 .SELECTOR__BUTTONFORWARD {
     padding: 15px 50px;
     color: white;
-    background: red;
+    background: $new-red;
     border: none;
     outline: none;
 }

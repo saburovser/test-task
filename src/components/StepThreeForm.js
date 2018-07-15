@@ -5,6 +5,9 @@ import ErrorModal from './ErrorModal';
 import StepSelector from './StepSelector';
 import { connect } from 'react-redux';
 import { submitThirdForm, nextForm, prevForm } from '../actions/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload, faUpload, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 class StepThreeForm extends React.Component {
     constructor(props) {
@@ -50,7 +53,6 @@ class StepThreeForm extends React.Component {
     };
 
     onFilesChange = (files) => {
-        
         if (files.length !== 0) {
             this.setState({ file: files[0], isLoading: true })
         }
@@ -63,6 +65,10 @@ class StepThreeForm extends React.Component {
 
     onError = () => {
         this.setState({ error: 'Файл не загружен, попробуйте ещё раз' })
+    };
+
+    onFilesError = () => {
+        this.setState({ error: 'Недопустимый тип файла' })
     };
 
     downloadFile = () => {
@@ -81,11 +87,20 @@ class StepThreeForm extends React.Component {
                 {this.props.step !==4 && <h1>Заявка на оформление полиса ДМС</h1>}
                 <div className="FORM">
                     <div className="FORM__BIGITEM">
-                        Скачать заявление
-                        <button onClick={this.downloadFile}>D</button>
+                        <p>Скачать заявление</p>
+                        <button
+                            onClick={this.downloadFile}
+                            disabled={this.props.step === 4}
+                        >
+                            <FontAwesomeIcon 
+                                icon={faDownload}
+                                size="2x"
+                            />
+                        </button>
                     </div>
                     <div className="FORM__BIGITEM">
-                        {!this.state.fileLoaded && <Files
+                        {!this.state.fileLoaded && <p>Загрузите скан или фото заявления с вашей подписью</p>}
+                        {!this.state.fileLoaded && !this.state.isLoading && <Files
                             ref='files'
                             onChange={this.onFilesChange}
                             onError={this.onFilesError}
@@ -95,13 +110,27 @@ class StepThreeForm extends React.Component {
                             minFileSize={0}
                             clickable
                         >
-                            Загрузите скан или фото заявления с вашей подписью
+                            <FontAwesomeIcon 
+                                icon={faUpload}
+                                size="2x"
+                            />
                         </Files>}
-                        {this.state.isLoading &&<img src="../public/img/loading.gif" height="50px" width="50px"/>}
+                        {this.state.isLoading &&
+                            <FontAwesomeIcon 
+                                icon={faSpinner}
+                                spin
+                                size="2x"
+                            />
+                        }
                         {this.state.fileLoaded && <p>{this.state.file.name}</p>}
-                        {this.state.fileLoaded && <button
+                        {this.state.fileLoaded && this.props.step !== 4 && <button
                                 onClick={this.onFileRemove}
-                        >X</button>}
+                        >
+                            <FontAwesomeIcon 
+                                icon={faTimesCircle}
+                                size="2x"
+                            />
+                        </button>}
                     </div>
                 </div>
                 {this.props.step !== 4 && <StepSelector 
